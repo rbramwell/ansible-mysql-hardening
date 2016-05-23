@@ -17,16 +17,16 @@ env:
     init: /sbin/init
     run_opts: ""
     playbook: default.yml
-   - distribution: ubuntu
-     version: 12.04
-     init: /sbin/init
-     run_opts: ""
-     playbook: default.yml
-   - distribution: ubuntu
-     version: 16.04
-     init: /sbin/init
-     run_opts: ""
-     playbook: default.yml
+  - distribution: ubuntu
+    version: 12.04
+    init: /sbin/init
+    run_opts: ""
+    playbook: default.yml
+  - distribution: ubuntu
+    version: 16.04
+    init: /sbin/init
+    run_opts: ""
+    playbook: default.yml
 
 services:
   - docker
