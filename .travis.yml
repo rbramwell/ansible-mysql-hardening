@@ -43,7 +43,7 @@ script:
   - 'sudo docker run --detach --volume="${PWD}":/etc/ansible/roles/mysql-hardening:ro ${run_opts} ${distribution}-${version}:ansible "${init}" > "${container_id}"'
 
   # install mysql role
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-galaxy install geerlingguy.mysql -p /etc/ansible/roles/'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-galaxy install -r requirements.yml -p /etc/ansible/roles/'
   # Ansible syntax check.
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/mysql-hardening/${playbook} --syntax-check'
 
