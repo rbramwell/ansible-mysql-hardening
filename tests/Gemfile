@@ -1,35 +1,17 @@
-# encoding: utf-8
-
 source 'https://rubygems.org'
 
-group :test do
-  gem 'rake'
-  gem 'foodcritic', '~> 4.0'
-  gem 'thor-foodcritic'
-  gem 'coveralls',  require: false
-end
-
-group :development do
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-kitchen'
-end
+gem 'rake'
+gem 'berkshelf', '~> 4.0' # Comes with ChefDK 0.9.0
 
 group :integration do
-  gem 'test-kitchen', '~> 1.0'
-  gem 'kitchen-ansible'
-  gem 'kitchen-vagrant'
-  gem 'kitchen-inspec'
-  gem 'kitchen-sharedtests', '~> 0.2.0'
-  gem 'kitchen-sync'
-  gem 'kitchen-transport-rsync'
-  gem 'kitchen-docker'
+          gem 'test-kitchen', '~> 1.4'
 end
 
-group :openstack do
-  gem 'kitchen-openstack'
+group :vagrant do
+          gem 'vagrant-wrapper', '~> 2.0'
+            gem 'kitchen-vagrant', '~> 0.18'
 end
 
-group :tools do
-  gem 'github_changelog_generator', '~> 1'
+group :docker do
+          gem 'kitchen-docker', '~> 2.1.0'
 end
