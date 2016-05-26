@@ -1,5 +1,7 @@
 FROM centos:6
 
+COPY Gemfile .
+
 # Install Ansible
 RUN yum -y update; yum clean all;
 RUN yum -y install epel-release
