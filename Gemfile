@@ -16,14 +16,13 @@ group :development do
 end
 
 group :integration do
-  gem 'test-kitchen', '~> 1.0'
+  gem 'test-kitchen', '~> 1.4'
   gem 'kitchen-ansible'
   gem 'kitchen-vagrant'
   gem 'kitchen-inspec'
   gem 'kitchen-sharedtests', '~> 0.2.0'
   gem 'kitchen-sync'
   gem 'kitchen-transport-rsync'
-  gem 'kitchen-docker'
 end
 
 group :openstack do
@@ -33,3 +32,9 @@ end
 group :tools do
   gem 'github_changelog_generator', '~> 1'
 end
+
+
+group :docker do
+   gem 'kitchen-docker', '~> 2.1.0'
+end
+
