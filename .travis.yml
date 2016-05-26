@@ -1,19 +1,38 @@
----
-rvm: 2.3.0
-
 sudo: required
 services: docker
+
+addons:
+ apt:
+   sources:
+     - chef-stable-precise
+   packages:
+     - chefdk
 
 env:
   matrix:
   - INSTANCE=default-ubuntu-1404
-  - INSTANCE=default-centos-66
+  - INSTANCE=default-ubuntu-1204
+  - INSTANCE=default-centos-71
 
-before_install: curl -L https://www.getchef.com/chef/install.sh | sudo bash -s -- -P chefdk
-install: sudo chef exec bundle install --jobs=3 --retry=3 --without='vagrant'
+# Do `bundle install` to get mixlib-shellout ~> 1.0.
+# test-kitchen 1.6.0 and test-kitchen 1.6.0 depend on mixlib-install ~> 0.7.0.
+install:
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  - bundle install
 
-# https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142455888
-before_script: sudo iptables -L DOCKER || sudo iptables -N DOCKER
-
-script: travis_retry chef exec bundle exec rake integration:docker[${INSTANCE}]
+before_script:
+  # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142230889
+  - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  # We have to install mixlib-versioning for ChefSpec to work against chef-ingredient
+  - /opt/chefdk/embedded/bin/chef gem install mixlib-versioning
+  - /opt/chefdk/embedded/bin/chef gem install kitchen-docker
+script:
+  - /opt/chefdk/embedded/bin/chef --version
+  - /opt/chefdk/embedded/bin/rubocop --version
+  - /opt/chefdk/embedded/bin/rubocop
+  - /opt/chefdk/embedded/bin/foodcritic --version
+  - /opt/chefdk/embedded/bin/foodcritic . --exclude spec
+  - bundle exec rspec spec
+  - KITCHEN_LOCAL_YAML=.kitchen.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
 
