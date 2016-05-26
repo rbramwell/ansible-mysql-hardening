@@ -76,6 +76,7 @@ script:
     && (echo 'MySQL running normally' && exit 0)
     || (echo 'MySQL not running' && exit 1)
 
+  - sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm inspec exec /etc/ansible/roles/mysql-hardening/test/integration/default/inspec/
   # Clean up
   - sudo docker stop "$(cat ${container_id})"
 
