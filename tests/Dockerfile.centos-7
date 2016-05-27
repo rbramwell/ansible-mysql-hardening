@@ -20,7 +20,7 @@ rm -f /lib/systemd/system/anaconda.target.wants/*;
 # Install Ansible
 RUN yum -y install epel-release
 RUN yum -y install git ansible sudo
-RUN yum -y install ruby-devel rubygems-devel gcc gcc-c++
+RUN yum -y install ruby-devel rubygems-devel gcc gcc-c++ make
 RUN yum clean all
 RUN curl -L https://www.getchef.com/chef/install.sh | bash -s -- -P chefdk -v 0.9.0
 RUN chef exec bundle install
