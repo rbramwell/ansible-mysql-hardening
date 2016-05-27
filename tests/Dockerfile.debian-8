@@ -8,7 +8,7 @@ RUN apt-get install -y software-properties-common git
 RUN apt-get update
 RUN apt-get install -y ansible
 RUN apt-get install -y ruby-dev ruby build-essential curl systemd
-RUN curl -L https://www.getchef.com/chef/install.sh | bash -s -- -P chefdk -v 0.9.0
+RUN curl -kL https://www.getchef.com/chef/install.sh | bash -s -- -P chefdk -v 0.9.0
 RUN chef exec bundle install
 
 # Install Ansible inventory file
