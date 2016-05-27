@@ -2,19 +2,6 @@ FROM ubuntu:16.04
 RUN apt-get update
 
 COPY Gemfile .
-
-# Install Ansible
-RUN apt-get install -y software-properties-common git
-RUN apt-add-repository -y ppa:ansible/ansible
-RUN apt-get update
-RUN apt-get install -y ansible
-RUN apt-get install -y ruby-dev ruby build-essential curl
-RUN curl -L https://www.getchef.com/chef/install.sh | bash -s -- -P chefdk -v 0.9.0
-RUN chef exec bundle install
-
-# Install Ansible inventory file
-RUN echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
-
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
 rm -f /lib/systemd/system/multi-user.target.wants/*; \
 rm -f /etc/systemd/system/*.wants/*; \
@@ -23,6 +10,18 @@ rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
 rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
 rm -f /lib/systemd/system/basic.target.wants/*; \
 rm -f /lib/systemd/system/anaconda.target.wants/*;
+
+# Install Ansible
+RUN apt-get install -y software-properties-common git
+RUN apt-add-repository -y ppa:ansible/ansible
+RUN apt-get update
+RUN apt-get install -y ansible
+RUN apt-get install -y ruby-dev ruby build-essential curl systemd
+RUN curl -L https://www.getchef.com/chef/install.sh | bash -s -- -P chefdk -v 0.9.0
+RUN chef exec bundle install
+
+# Install Ansible inventory file
+RUN echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
 
 VOLUME [ “/sys/fs/cgroup” ]
 CMD [“/usr/sbin/init”]
