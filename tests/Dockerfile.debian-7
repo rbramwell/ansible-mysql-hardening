@@ -7,7 +7,7 @@ COPY Gemfile .
 RUN apt-get install -y software-properties-common git
 RUN echo 'deb http://http.debian.net/debian wheezy-backports main' > /etc/apt/sources.list.d/backports.list
 RUN apt-get update
-RUN apt-get -t wheezy-backports install "ansible"
+RUN apt-get -t wheezy-backports install -y "ansible"
 RUN apt-get install -y ruby-dev ruby build-essential curl systemd
 RUN curl -L https://www.getchef.com/chef/install.sh | bash -s -- -P chefdk -v 0.9.0
 RUN chef exec bundle install
