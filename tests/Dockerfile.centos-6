@@ -3,7 +3,7 @@ FROM centos:6
 COPY Gemfile .
 
 # Disable requiretty
-RUN sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers
+#RUN sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers
 
 # Install Ansible
 RUN yum -y update; yum clean all;
@@ -11,7 +11,7 @@ RUN yum -y install epel-release
 RUN yum -y install git ansible sudo
 RUN yum -y install ruby-devel rubygems-devel gcc gcc-c++
 RUN yum clean all
-RUN curl -L https://www.getchef.com/chef/install.sh | sudo bash -s -- -P chefdk -v 0.9.0
+RUN curl -L https://www.getchef.com/chef/install.sh |bash -s -- -P chefdk -v 0.9.0
 RUN chef exec bundle install
 
 # Install Ansible inventory file
