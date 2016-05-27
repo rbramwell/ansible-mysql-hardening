@@ -1,7 +1,6 @@
 ---
 - name: wrapper playbook for kitchen testing "ansible-mysql-hardening"
   hosts: localhost
-  become: yes
   vars:
     overwrite_global_mycnf: no
     mysql_hardening_enabled: yes
