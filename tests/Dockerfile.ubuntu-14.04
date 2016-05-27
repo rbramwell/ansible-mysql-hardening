@@ -6,6 +6,9 @@ RUN apt-get install -y software-properties-common git
 RUN apt-add-repository -y ppa:ansible/ansible
 RUN apt-get update
 RUN apt-get install -y ansible
+RUN apt-get install -y ruby-devel rubygems-devel gcc gcc-c++
+RUN curl -L https://www.getchef.com/chef/install.sh | sudo bash -s -- -P chefdk -v 0.9.0
+RUN chef exec bundle install
 
 COPY initctl_faker .
 RUN chmod +x initctl_faker && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl

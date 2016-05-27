@@ -7,26 +7,26 @@ env:
     init: /sbin/init
     run_opts: ""
     playbook: default.yml
-#  - distribution: centos
-#    version: 7
-#    init: /usr/lib/systemd/systemd
-#    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
-#    playbook: default.yml
-#  - distribution: ubuntu
-#    version: 14.04
-#    init: /sbin/init
-#    run_opts: ""
-#    playbook: default.yml
-#  - distribution: ubuntu
-#    version: 12.04
-#    init: /sbin/init
-#    run_opts: ""
-#    playbook: default.yml
-#  - distribution: ubuntu
-#    version: 16.04
-#    init: /sbin/init
-#    run_opts: ""
-#    playbook: default.yml
+  - distribution: centos
+    version: 7
+    init: /usr/lib/systemd/systemd
+    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    playbook: default.yml
+  - distribution: ubuntu
+    version: 14.04
+    init: /sbin/init
+    run_opts: ""
+    playbook: default.yml
+  - distribution: ubuntu
+    version: 12.04
+    init: /sbin/init
+    run_opts: ""
+    playbook: default.yml
+  - distribution: ubuntu
+    version: 16.04
+    init: /sbin/init
+    run_opts: ""
+    playbook: default.yml
 
 services:
   - docker
@@ -63,7 +63,7 @@ script:
   - sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/mysql.err || true
 
   # run tests
-  - sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm bundle exec inspec exec /etc/ansible/roles/mysql-hardening/test/integration/default/inspec/
+  # - sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm bundle exec inspec exec /etc/ansible/roles/mysql-hardening/test/integration/default/inspec/
 
   # Clean up
   - sudo docker stop "$(cat ${container_id})"
