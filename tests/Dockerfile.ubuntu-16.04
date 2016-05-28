@@ -25,6 +25,5 @@ rm -f /lib/systemd/system/anaconda.target.wants/*; \
 rm -f /lib/systemd/system/plymouth*; \
 rm -f /lib/systemd/system/systemd-update-utmp*;
 RUN systemctl set-default multi-user.target
-ENV init /lib/systemd/systemd
-VOLUME [ "/sys/fs/cgroup" ]
-ENTRYPOINT ["/lib/systemd/systemd"]
+VOLUME ["/sys/fs/cgroup"]
+CMD ["/usr/sbin/init"]
