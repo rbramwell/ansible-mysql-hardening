@@ -11,5 +11,5 @@ RUN chef exec bundle install
 # Install Ansible inventory file
 RUN echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
 
-VOLUME [ “/sys/fs/cgroup” ]
-CMD [“/usr/sbin/init”]
+VOLUME [ "/sys/fs/cgroup" ]
+CMD ["/usr/sbin/init"]
