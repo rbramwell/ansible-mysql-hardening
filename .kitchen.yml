@@ -2,7 +2,10 @@
 driver:
   name: docker
   privileged: true
-
+  cap_add:
+  - SYS_ADMIN
+  security_opt:
+  - seccomp:unconfined
 provisioner:
   name: ansible_playbook
   test_repo_uri: https://github.com/hardening-io/tests-mysql-hardening.git
