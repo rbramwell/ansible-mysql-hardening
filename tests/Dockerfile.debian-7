@@ -4,7 +4,7 @@ RUN apt-get update
 COPY Gemfile .
 
 # Install Ansible
-RUN apt-get install -y software-properties-common git ruby-dev ruby build-essential curl systemd python-pip python-dev libffi-dev
+RUN apt-get install -y software-properties-common git ruby-dev ruby build-essential curl python-pip python-dev libffi-dev
 RUN pip install PyYAML jinja2 paramiko
 RUN git clone https://github.com/ansible/ansible.git
 RUN cd ansible && make install && mkdir /etc/ansible
