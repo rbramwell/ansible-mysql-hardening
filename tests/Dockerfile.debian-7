@@ -5,8 +5,8 @@ COPY Gemfile .
 
 # Install Ansible
 RUN apt-get install -y software-properties-common git wget curl ruby-dev ruby build-essential systemd python-pip python-dev libffi-dev
-RUN pip install PyYAML jinja2 paramiko
-RUN git clone https://github.com/ansible/ansible.git
+RUN pip install paramiko PyYAML Jinja2 httplib2 six
+RUN git clone https://github.com/ansible/ansible.git --recursive
 RUN cd ansible && make install
 RUN mkdir -p /etc/ansible/roles/
 RUN curl -L https://www.getchef.com/chef/install.sh | bash -s -- -P chefdk -v 0.9.0
