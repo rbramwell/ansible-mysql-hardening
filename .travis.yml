@@ -59,7 +59,7 @@ script:
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/mysql-hardening/${playbook} --syntax-check'
 
   # Test role.
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/mysql-hardening/${playbook}'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/mysql-hardening/${playbook} -vvvv'
 
   # Test role idempotence.
 #  - >
